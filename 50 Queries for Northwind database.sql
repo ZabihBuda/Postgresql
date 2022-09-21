@@ -58,7 +58,7 @@ productname,
 unitprice,
 quantityperunit
 FROM products
-WHERE discontinued=1
+WHERE discontinued=1;
 
 --9: Create a report showing all the ContactName, Address, City of all customers not from Germany, Mexico, Spain.
 SELECT 
@@ -66,4 +66,50 @@ contactname,
 address,
 city
 FROM customers
-WHERE country NOT IN ('Germany', 'Mexico', 'Spain' )
+WHERE country NOT IN ('Germany', 'Mexico', 'Spain' );
+
+--10: Create a report showing OrderDate, ShippedDate, CustomerID, Freight of all orders placed on 21 May 1996.
+SELECT
+orderdate,
+shippeddate,
+customerid,
+freight
+FROM orders
+WHERE orderdate='1996-05-21';
+
+--11: Create a report showing FirstName, LastName, Country from the employees not from United States.
+SELECT 
+firstname,
+lastname,
+country
+FROM employees
+WHERE country != 'USA';
+
+--12: Create a report that shows the EmployeeID, OrderID, CustomerID, RequiredDate, ShippedDate from all orders shipped later than the required date.
+SELECT
+employeeid,
+orderid,
+customerid,
+requireddate,
+shippeddate
+FROM orders
+WHERE shippeddate > requireddate;
+
+-- 13: Create a report that shows the City, CompanyName, ContactName of customers from cities starting with A or B.
+SELECT 
+city,
+companyname,
+contactname
+FROM customers
+WHERE city LIKE 'A%'
+OR city LIKE 'B%';
+
+-- 14: Create a report showing all the even numbers of OrderID from the orders table.
+SELECT *
+FROM orders
+WHERE orderid % 2 =0;
+
+--15: Create a report that shows all the orders where the freight cost more than $500.
+SELECT *
+FROM orders
+WHERE freight >500

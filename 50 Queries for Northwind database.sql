@@ -112,4 +112,69 @@ WHERE orderid % 2 =0;
 --15: Create a report that shows all the orders where the freight cost more than $500.
 SELECT *
 FROM orders
-WHERE freight >500
+WHERE freight >500;
+
+--16: Create a report that shows the ProductName, UnitsInStock, UnitsOnOrder, ReorderLevel of all products that are up for reorder.
+SELECT 
+productname,
+unitsinstock,
+unitsonorder,
+reorderlevel
+FROM products
+WHERE discontinued = 0
+ORDER BY productname;
+
+--17: Create a report that shows the CompanyName, ContactName number of all customer that have no fax number.
+SELECT 
+companyname,
+contactname 
+FROM customers
+WHERE fax IS NULL;
+
+--18. Create a report that shows the FirstName, LastName of all employees that do not report to anybody.
+SELECT 
+firStname,
+lastname
+FROM employees
+WHERE reportsto IS NULL;
+
+--19. Create a report showing all the odd numbers of OrderID from the orders table.
+SELECT * FROM orders
+WHERE orderid % 2 !=0;
+
+--20. Create a report that shows the CompanyName, ContactName, Fax of all customers that do not have Fax number and sorted by ContactName.
+SELECT
+companyname,
+contactname,
+fax 
+FROM customers
+WHERE fax IS NULL
+ORDER BY contactname;
+
+--21. Create a report that shows the City, CompanyName, ContactName of customers from cities that has letter L in the name sorted by ContactName.
+SELECT 
+city,
+companyname,
+contactname
+FROM customers
+WHERE city LIKE '%L%'
+ORDER BY contactname;
+
+--22. Create a report that shows the FirstName, LastName, BirthDate of employees born in the 1950s.
+SELECT 
+firstname,
+lastname,
+birthdate 
+FROM employees
+WHERE EXTRACT(YEAR FROM birthdate)>=1950
+AND EXTRACT(YEAR FROM birthdate)<1960;
+
+--23. Create a report that shows the FirstName, LastName, the year of Birthdate as birth year from the employees table.
+SELECT 
+firstname,
+lastname,
+EXTRACT(YEAR FROM birthdate) AS "birth year"
+FROM employees;
+
+
+

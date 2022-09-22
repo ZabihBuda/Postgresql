@@ -280,17 +280,4 @@ FROM orders
 GROUP BY customerid 
 HAVING SUM(freight) >200
 
---35. Create a report that shows the OrderID ContactName, UnitPrice, Quantity, Discount from the order details, orders and customers table with discount given on every purchase.
 
---36. Create a report that shows the EmployeeID, the LastName and FirstName as employee, and the LastName and FirstName of
---who they report to as manager from the employees table sorted by Employee ID. HINT: This is a SelfJoin.
---37. Create a report that shows the average, minimum and maximum UnitPrice of all products as AveragePrice, MinimumPrice
---and MaximumPrice respectively.
---38. Create a view named CustomerInfo that shows the CustomerID, CompanyName, ContactName, ContactTitle, Address, City,
---Country, Phone, OrderDate, RequiredDate, ShippedDate from the customers and orders table. HINT: Create a View.
---39. Change the name of the view you created from customerinfo to customer details.
---40. Create a view named ProductDetails that shows the ProductID, CompanyName, ProductName, CategoryName, Description,
---QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued from the supplier, products and
---categories tables. HINT: Create a View
---41. Drop the customer details view.
---42. Create a report that fetch the first 5 character of categoryName from the category tables and renamed as ShortInfo

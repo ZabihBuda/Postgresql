@@ -241,4 +241,56 @@ lastname,
 homephone,
 ' -Ex: ',
 "extension") AS contact_info
-FROM employees
+FROM employees;
+
+--31: Create a report that shows the ContactName of all customers that do not have letter A as the second alphabet in their Contactname.
+SELECT contactname
+FROM customers
+WHERE contactname NOT LIKE '_a%';
+
+--32. Create a report that shows the average UnitPrice rounded to the next whole number, total price of UnitsInStock and
+--maximum number of orders from the products table. All saved as AveragePrice, TotalStock and MaxOrder respectively.
+
+SELECT 
+ROUND(AVG(unitprice)) AS AveragePrice,
+SUM(unitsinstock) AS TotalStock,
+MAX(unitsonorder) AS MaxOrder 
+FROM products;
+
+--33. Create a report that shows the SupplierID, CompanyName, CategoryName, ProductName and UnitPrice from the products, suppliers and categories table.
+
+SELECT
+p.supplierid ,
+s.companyname,
+c.categoryname,
+p.productname,
+p.unitprice 
+FROM suppliers s 
+INNER JOIN products p 
+ON p.supplierid = s.supplierid 
+INNER JOIN categories c
+ON c.categoryid =p.categoryid;
+
+--34. Create a report that shows the CustomerID, sum of Freight, from the orders table with sum of freight greater $200, grouped
+--by CustomerID. HINT: you will need to use a Groupby and a Having statement.
+SELECT 
+customerid,
+SUM(freight) AS freight
+FROM orders
+GROUP BY customerid 
+HAVING SUM(freight) >200
+
+--35. Create a report that shows the OrderID ContactName, UnitPrice, Quantity, Discount from the order details, orders and customers table with discount given on every purchase.
+
+--36. Create a report that shows the EmployeeID, the LastName and FirstName as employee, and the LastName and FirstName of
+--who they report to as manager from the employees table sorted by Employee ID. HINT: This is a SelfJoin.
+--37. Create a report that shows the average, minimum and maximum UnitPrice of all products as AveragePrice, MinimumPrice
+--and MaximumPrice respectively.
+--38. Create a view named CustomerInfo that shows the CustomerID, CompanyName, ContactName, ContactTitle, Address, City,
+--Country, Phone, OrderDate, RequiredDate, ShippedDate from the customers and orders table. HINT: Create a View.
+--39. Change the name of the view you created from customerinfo to customer details.
+--40. Create a view named ProductDetails that shows the ProductID, CompanyName, ProductName, CategoryName, Description,
+--QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued from the supplier, products and
+--categories tables. HINT: Create a View
+--41. Drop the customer details view.
+--42. Create a report that fetch the first 5 character of categoryName from the category tables and renamed as ShortInfo

@@ -176,5 +176,69 @@ lastname,
 EXTRACT(YEAR FROM birthdate) AS "birth year"
 FROM employees;
 
+--24. Create a report showing OrderID, total number of Order ID as NumberofOrders from the orderdetails table grouped by OrderID and sorted by NumberofOrders in descending order. 
+SELECT 
+orderid, COUNT(orderid) AS NumberofOrders
+FROM order_details
+GROUP BY orderid 
+ORDER BY COUNT(orderid) DESC;
+
+--25. Create a report that shows the SupplierID, ProductName, CompanyName from all product Supplied by Exotic Liquids, Specialty Biscuits, Ltd., Escargots Nouveaux sorted by the supplier ID
+SELECT 
+p.supplierid,
+p.productname,
+s.companyname
+FROM products p
+LEFT JOIN suppliers s
+ON s.supplierid = p.supplierid 
+WHERE companyname IN ('Exotic Liquids', 'Specialty Biscuits, Ltd.','Escargots Nouveaux')
+ORDER BY supplierid;
+
+--26. Create a report that shows the ShipPostalCode, OrderID, OrderDate, RequiredDate, ShippedDate, ShipAddress of all orders with ShipPostalCode beginning with "98124".
+SELECT 
+shippostalcode,
+orderid,
+orderdate,
+requireddate,
+shippeddate,
+shipaddress 
+FROM orders
+WHERE shippostalcode LIKE '98124%';
+
+--27. Create a report that shows the ContactName, ContactTitle, CompanyName of customers that the has no "Sales" in their ContactTitle.
+SELECT 
+contactname ,
+contacttitle ,
+companyname 
+FROM customers
+WHERE contacttitle NOT LIKE '%Sales%';
+
+--28. Create a report that shows the LastName, FirstName, City of employees in cities other than "Seattle";
+SELECT
+lastname,
+firstname,
+city
+FROM employees
+WHERE city !='Seattle';
+
+--29. Create a report that shows the CompanyName, ContactTitle, City, Country of all customers in any city in Mexico or other cities in Spain other than Madrid.
+SELECT
+companyname,
+contacttitle,
+city,
+country
+FROM customers
+WHERE country IN ('Mexico', 'Spain')
+AND city != 'Madrid';
 
 
+--30. Create a report that shows the firstname, lastname, 'can be reached at', hompehone, and extension of employees in one line 
+SELECT CONCAT(
+firstname,
+' ',
+lastname, 
+'can be reached at ',
+homephone,
+' -Ex: ',
+"extension") AS contact_info
+FROM employees

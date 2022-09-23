@@ -346,3 +346,28 @@ title,
 EXTRACT(YEAR FROM current_date) - EXTRACT(YEAR FROM birthdate)  AS Age
 FROM employees  
 
+--42: create a report that shows the group of employees based on the manager they reprot to.
+WITH reportingstructure AS 
+(
+SELECT
+e.employeeid ,
+e.firstname || ' ' || e.lastname AS employee,
+em.firstname || ' ' || em.lastname AS manager
+FROM employees e
+LEFT JOIN employees em
+ON em.employeeid = e.reportsto 
+ORDER BY e.employeeid
+
+),
+
+employee_groups AS (
+SELECT 
+	employeeid,
+	CASE WHEN manager = 'Andrew Fuller' THEN 'A'
+	ELSE 'B' END AS groups
+FROM reportingstructure rs)
+
+SELECT * FROM reportingstructure rs 
+NATURAL JOIN employee_groups eg
+
+

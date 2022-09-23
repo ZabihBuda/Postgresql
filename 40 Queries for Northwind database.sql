@@ -278,6 +278,71 @@ customerid,
 SUM(freight) AS freight
 FROM orders
 GROUP BY customerid 
-HAVING SUM(freight) >200
+HAVING SUM(freight) >200;
 
+--35. Create a report that shows the OrderID ContactName, UnitPrice, Quantity, Discount from the order details, orders and customers table with discount given on every purchase.
+SELECT
+o.orderid ,
+c.contactname ,
+od.unitprice ,
+od.quantity ,
+od.discount 
+FROM customers c
+JOIN orders o
+ON o.customerid = c.customerid 
+JOIN order_details od
+ON od.orderid = o.orderid 
+WHERE od.discount > 0;
+ 
+--36. Create a report that shows the EmployeeID, the LastName and FirstName as employee, and the LastName and FirstName of
+--who they report to as manager from the employees table sorted by Employee ID. HINT: This is a SelfJoin.
+SELECT
+e.employeeid ,
+e.lastname || ', ' || e.firstname AS employee,
+em.lastname || ', ' || em.firstname AS manager
+FROM employees e
+LEFT JOIN employees em
+ON em.employeeid = e.reportsto 
+ORDER BY e.employeeid;
+
+--37. Create a report that shows the average, minimum and maximum UnitPrice of all products as AveragePrice, MinimumPrice and MaximumPrice respectively.
+SELECT
+AVG(unitprice) AS AveragePrice,
+MIN(unitprice) AS MinimumPrice,
+MAX(unitprice) AS MaximumPrice
+FROM products;
+
+--38. Create a view named CustomerInfo that shows the CustomerID, CompanyName, ContactName, ContactTitle, Address, City,
+--Country, Phone, OrderDate, RequiredDate, ShippedDate from the customers and orders table. HINT: Create a View.
+CREATE VIEW Customerinfo2 AS 
+SELECT
+c.customerid ,
+c.companyname ,
+c.contactname ,
+c.contacttitle ,
+c.address ,
+c.city ,
+c.country ,
+c.phone ,
+o.orderdate ,
+o.requireddate ,
+o.shippeddate 
+FROM customers c
+JOIN orders o 
+ON c.customerid = o.customerid;
+
+--39. Drop the customer details view.
+DROP VIEW IF EXISTS customer_details;
+
+--40. Create a report that fetch the first 5 character of categoryName from the category tables and renamed as ShortInfo
+SELECT 
+SUBSTRING(categoryname, 1, 5) AS shortinfo
+FROM categories c;
+
+--41: create a report that shows firstname and lastname as Fullname, Title, and Age of employees from employees table, sort by Age.
+
+SELECT firstname || ' ' || lastname AS Fullname, 
+title, 
+EXTRACT(YEAR FROM current_date) - EXTRACT(YEAR FROM birthdate)  AS Age
+FROM employees  
 

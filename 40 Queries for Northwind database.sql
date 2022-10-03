@@ -368,6 +368,13 @@ SELECT
 FROM reportingstructure rs)
 
 SELECT * FROM reportingstructure rs 
-NATURAL JOIN employee_groups eg
+NATURAL JOIN employee_groups eg;
+
+--43: Develop a query to show a table only for USA employees without creating a physical table. hint: use view function.
+CREATE VIEW US_Employees AS
+SELECT * FROM employees WHERE country LIKE 'USA';
+
+SELECT * FROM US_Employees
+
 
 
